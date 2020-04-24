@@ -2,12 +2,12 @@ const express = require('express')
 const bcrypt = require('bcrypt-nodejs')
 const cors = require('cors')
 const knex = require('knex')
-
 const register = require('./controllers/register')
 const signin = require('./controllers/signin')
 const profile = require('./controllers/profile')
 const image = require('./controllers/image')
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0
 const db = knex({
     client: 'pg',
     connection: {
@@ -15,10 +15,6 @@ const db = knex({
       ssl: true
     }
   });
-
-db.select('*').from('users').then(data => {
-    console.log(data)
-})
 
 const app = express();
 
